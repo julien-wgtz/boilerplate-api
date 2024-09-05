@@ -3,8 +3,8 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { NotFoundExceptionFilter } from './filter/not-found.filter';
 import { readFileSync } from 'fs';
-import * as session from 'express-session'; // Import session directly from 'express-session'
-import * as connectPgSimple from 'connect-pg-simple';
+import session from 'express-session'; // Import session directly from 'express-session'
+import  connectPgSimple from 'connect-pg-simple';
 
 
 async function bootstrap() {
