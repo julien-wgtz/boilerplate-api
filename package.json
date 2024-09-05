@@ -18,10 +18,12 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "migration:dev": "dotenv -e config/.env.development -- npx prisma migrate dev --skip-seed --create-only",
-    "migrate:generate": "dotenv -e config/.env.development -- npx prisma generate",
+    "migration": "dotenv -e config/.env.development -- npx prisma migrate dev --skip-seed --create-only",
+    "prisma:generate": "dotenv -e config/.env.development -- npx prisma generate",
     "dbpush:dev": "dotenv -e config/.env.development -- npx prisma db push ",
-    "dbrestore:dev": "dotenv -e config/.env.development -- npx prisma migrate reset"
+    "dbrestore:dev": "dotenv -e config/.env.development -- npx prisma migrate reset",
+    "dbpush:prod": "dotenv -e config/.env.production -- npx prisma db push ",
+    "dbrestore:prod": "dotenv -e config/.env.production -- npx prisma migrate reset"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
