@@ -36,13 +36,26 @@ $ npm install
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
+$ npm run dev
 
 # production mode
-$ npm run start:prod
+$ npm run prod
+```
+
+## Prisma
+
+```bash
+#Migrate
+$ npm run migrate:postgres
+
+#Generate client
+$ npm run migrate:generate
+
+#Push to database dev
+$ npm run dbpush:dev
+
+#Restore database
+$ npm run dbrestore:dev
 ```
 
 ## Test
