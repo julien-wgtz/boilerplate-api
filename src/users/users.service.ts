@@ -5,7 +5,7 @@ import * as bcrypt from 'bcrypt';
 
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async createUserAndAccount(createUserDto: CreateUserDto) {
@@ -38,4 +38,13 @@ export class UserService {
 	  return { user, account };
 	});
   }
+
+	async findByEmail(email: string) {
+		return this.prisma.user.findUnique({
+		where: {
+			email,
+		},
+		});
+	}
+
 }

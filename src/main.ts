@@ -3,7 +3,9 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { NotFoundExceptionFilter } from './filter/not-found.filter';
 import { readFileSync } from 'fs';
-import { NestFactoryStatic } from '@nestjs/core/nest-factory';
+import * as session from 'express-session'; // Import session directly from 'express-session'
+import * as connectPgSimple from 'connect-pg-simple';
+
 
 async function bootstrap() {
   let app;
@@ -26,9 +28,26 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   const port = configService.get('PORT') as number; 
   const hostname = configService.get('HOSTNAME') as string;
+  const pgSession = connectPgSimple(session);
 
   app.useGlobalFilters(new NotFoundExceptionFilter());
-
+  app.use(
+    session({
+      store: new pgSession({
+        conString: configService.get('DATABASE_URL'),
+        tableName: 'Sessions',
+      }),
+      secret: configService.get('SECRET_SESSION'),
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+      },
+    }),
+  );
   await app.listen(port, hostname, () => {
     console.log(`Application running on https://${hostname}:${port}`);
   });

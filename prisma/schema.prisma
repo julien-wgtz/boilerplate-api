@@ -43,6 +43,14 @@ model UserAccount {
   createdAt DateTime @default(now())
 }
 
+model Session {
+  id        Int   @id @default(autoincrement())
+  sid       String   @unique
+  expire   DateTime
+  sess   Json
+  @@map("Sessions")
+}
+
 //
 //  Enumérations
 //
