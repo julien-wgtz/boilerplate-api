@@ -33,6 +33,7 @@
     "@nestjs/passport": "^10.0.3",
     "@nestjs/platform-express": "^10.0.0",
     "@prisma/client": "^5.19.1",
+    "@react-email/components": "^0.0.25",
     "bcrypt": "^5.1.1",
     "connect-pg-simple": "^9.0.1",
     "express-session": "^1.18.0",
@@ -40,6 +41,7 @@
     "passport-local": "^1.0.0",
     "pg": "^8.12.0",
     "reflect-metadata": "^0.1.13",
+    "resend": "^4.0.0",
     "rxjs": "^7.8.1",
     "session": "^0.1.0"
   },

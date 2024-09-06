@@ -19,7 +19,9 @@ model User {
   email     String    @unique
   name      String?
   password  String
-  accounts  UserAccount[] // Relation Many-to-Many entre User et Account
+  accounts  UserAccount[]
+  verified  Boolean   @default(false)
+  tokens    Token[]
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }
@@ -49,6 +51,16 @@ model Session {
   expire   DateTime
   sess   Json
   @@map("Sessions")
+}
+
+model Token {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  token     String
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+    @@map("Tokens")
 }
 
 //

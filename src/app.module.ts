@@ -5,6 +5,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { UserModule } from './users/users.module';
 import { PrismaModule } from './prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
+import { MailerModule } from './mailer/mailer.module';
 
 
 @Module({
@@ -15,7 +16,7 @@ import { AuthModule } from './auth/auth.module';
     ],
     cache: true,
     isGlobal: true,
-  }), UserModule, PrismaModule, AuthModule],
+  }), UserModule, PrismaModule, AuthModule, MailerModule],
   controllers: [AppController],
   providers: [AppService],
 })
