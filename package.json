@@ -7,7 +7,7 @@
   "license": "UNLICENSED",
   "scripts": {
     "build": "nest build && npm run copy-static",
-    "postinstall": "npx prisma generate",
+    "postinstall": "npx prisma generate && npm run copy-static",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "dev": "npm-run-all --serial set-env start:dev",
