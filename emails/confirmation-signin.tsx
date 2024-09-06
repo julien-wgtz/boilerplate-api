@@ -30,7 +30,7 @@ import {
 		<Body style={main}>
 		  <Container style={container}>
 			<Img
-			  src={`../static/logo.png`}
+			  src={`${baseUrl}/emails/static/logo.png`}
 			  width="120"
 			  height="170"
 			  alt="Nexus"
