@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service'; // Prisma service pour interagir avec la base de données
 import { CreateUserDto } from './dto/user.dto';
 import * as bcrypt from 'bcrypt';
-import { MailerService } from 'src/mailer/mailer.service';
+import { MailerService } from '../mailer/mailer.service';
 import { randomBytes } from 'crypto';
 
 

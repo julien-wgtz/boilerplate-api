@@ -16,7 +16,8 @@ import {
   }
   const frontURL = process.env.FRONT_URL;
   const baseUrl = process.env.HOSTNAME;
-
+  const port = process.env.PORT;
+  console.log(process.env);
   export const ConfirmationSignin = ({
 	confirmationToken,
   }: ConfirmationSigninProps) => {
@@ -30,7 +31,7 @@ import {
 		<Body style={main}>
 		  <Container style={container}>
 			<Img
-			  src={`${baseUrl}/emails/static/logo.png`}
+			  src={`https://${baseUrl}:${port}/logo.png`}
 			  width="120"
 			  height="170"
 			  alt="Nexus"

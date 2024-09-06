@@ -5,11 +5,12 @@ import { NotFoundExceptionFilter } from './filter/not-found.filter';
 import { readFileSync } from 'fs';
 import session from 'express-session'; // Import session directly from 'express-session'
 import  connectPgSimple from 'connect-pg-simple';
-
+import { join } from 'path';
 
 async function bootstrap() {
   let app;
-
+console.log(process.env
+);
   if (process.env.NODE_ENV === 'development') {
     const httpsOptions = {
       key: readFileSync('config/certs/server.key'),  // chemin vers ta clé privée
@@ -29,7 +30,6 @@ async function bootstrap() {
   const port = configService.get('PORT') as number; 
   const hostname = configService.get('HOSTNAME') as string;
   const pgSession = connectPgSimple(session);
-
   app.useGlobalFilters(new NotFoundExceptionFilter());
   app.use(
     session({
