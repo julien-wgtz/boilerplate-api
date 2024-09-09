@@ -25,7 +25,5 @@ export class MailerService {
       subject,
       react: templateFunction(data),
     });
-
-    console.log(mail);
   }
 }

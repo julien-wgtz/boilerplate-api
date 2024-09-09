@@ -9,8 +9,7 @@ import { join } from 'path';
 
 async function bootstrap() {
   let app;
-console.log(process.env
-);
+
   if (process.env.NODE_ENV === 'development') {
     const httpsOptions = {
       key: readFileSync('config/certs/server.key'),  // chemin vers ta clé privée
@@ -41,7 +40,7 @@ console.log(process.env
       resave: false,
       saveUninitialized: false,
       cookie: {
-        maxAge: 30 * 24 * 60 * 60 * 1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000, // Cookie lasts for 30 days
         httpOnly: true,
         secure: true,
         sameSite: 'none',

@@ -9,8 +9,8 @@ export class AuthController {
   constructor(private userService: UsersService) {}
   
   @Post('register')
-  async register(@Body() createUserDto: CreateUserDto) {
-    return this.userService.createUserAndAccount(createUserDto);
+  async register(@Body() createUserDto: CreateUserDto, @Request() req) {
+    return this.userService.createUserAndAccount(createUserDto, req);
   }
 
   @UseGuards(AuthGuard('local')) 

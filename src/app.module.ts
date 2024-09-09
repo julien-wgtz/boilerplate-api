@@ -8,6 +8,7 @@ import { AuthModule } from './auth/auth.module';
 import { MailerModule } from './mailer/mailer.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
+import { TokensModule } from './tokens/tokens.module';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { join } from 'path';
   ServeStaticModule.forRoot({
     rootPath: join(__dirname, '..', 'public'),
   }),
-  UserModule, PrismaModule, AuthModule, MailerModule],
+  UserModule, PrismaModule, AuthModule, MailerModule, TokensModule],
   controllers: [AppController],
   providers: [AppService],
 })

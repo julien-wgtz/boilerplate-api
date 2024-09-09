@@ -1,3 +1,4 @@
+import { Res } from '@nestjs/common';
 import {
 	Body,
 	Button,
@@ -11,17 +12,17 @@ import {
   } from '@react-email/components';
   import * as React from 'react';
   
-  export interface ConfirmationSigninProps {
-	confirmationToken: string;
+  export interface ResetPasswordProps {
+	token: string;
   }
   const frontURL = process.env.FRONT_URL;
   const baseUrl = process.env.HOSTNAME;
   const port = process.env.PORT;
 
-  export const ConfirmationSignin = ({
-	confirmationToken,
-  }: ConfirmationSigninProps) => {
-	const confirmationUrl = `${frontURL}/auth/confirm?token=${confirmationToken}`;
+  export const ResetPassword = ({
+	token,
+  }: ResetPasswordProps) => {
+	const confirmationUrl = `${frontURL}/auth/confirm?token=${token}`;
 	return (
 	  <Html>
 		<Head />
@@ -39,16 +40,14 @@ import {
 			/>
 			<Text style={paragraph}>Bonjour,</Text>
 			<Text style={paragraph}>
-			  Nous sommes ravis de vous accueillir chez Nexus ! Vous êtes
-			  désormais à quelques pas de transformer votre façon de travailler
-			  grâce à notre solution SaaS innovante.
+			  Si vous avez demandé un changement de mot de passe, veuillez cliquer sur le lien ci-dessous. Si vous n'avez pas demandé de changement de mot de passe, ignorez cet email.
 			</Text>
 			<Text style={paragraph}>
-			  <strong>Activez votre compte</strong>
+			  <strong>Changer de mot passe</strong>
 			</Text>
 			<Section style={btnContainer}>
 			  <Button style={button} href={confirmationUrl}>
-				Confirmer mon compte
+				Nouveau mot de passe
 			  </Button>
 			</Section>
 		  </Container>
@@ -57,7 +56,7 @@ import {
 	);
   };
   
-  export default ConfirmationSignin;
+  export default ResetPassword;
   
   const main = {
 	backgroundColor: '#ffffff',

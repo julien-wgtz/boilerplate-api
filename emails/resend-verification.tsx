@@ -12,16 +12,16 @@ import {
   import * as React from 'react';
   
   export interface ConfirmationSigninProps {
-	confirmationToken: string;
+	token: string;
   }
   const frontURL = process.env.FRONT_URL;
   const baseUrl = process.env.HOSTNAME;
   const port = process.env.PORT;
 
-  export const ConfirmationSignin = ({
-	confirmationToken,
+  export const ResendVerification = ({
+	token,
   }: ConfirmationSigninProps) => {
-	const confirmationUrl = `${frontURL}/auth/confirm?token=${confirmationToken}`;
+	const confirmationUrl = `${frontURL}/auth/confirm?token=${token}`;
 	return (
 	  <Html>
 		<Head />
@@ -39,12 +39,10 @@ import {
 			/>
 			<Text style={paragraph}>Bonjour,</Text>
 			<Text style={paragraph}>
-			  Nous sommes ravis de vous accueillir chez Nexus ! Vous êtes
-			  désormais à quelques pas de transformer votre façon de travailler
-			  grâce à notre solution SaaS innovante.
+			  Email de re confirmation de l'adresse mail
 			</Text>
 			<Text style={paragraph}>
-			  <strong>Activez votre compte</strong>
+			  <strong>Valider l'adresse mail</strong>
 			</Text>
 			<Section style={btnContainer}>
 			  <Button style={button} href={confirmationUrl}>
@@ -57,7 +55,7 @@ import {
 	);
   };
   
-  export default ConfirmationSignin;
+  export default ResendVerification;
   
   const main = {
 	backgroundColor: '#ffffff',
