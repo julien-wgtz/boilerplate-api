@@ -22,6 +22,7 @@ model User {
   accounts  UserAccount[]
   verified  Boolean   @default(false)
   tokens    Token[]
+  language  String    @default("fr")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
 }

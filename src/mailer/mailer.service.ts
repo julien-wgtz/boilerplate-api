@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import EmailTemplates from '../../emails';
 import { Resend } from 'resend';
+import i18n from '../../i18n';
 
 @Injectable()
 export class MailerService {
@@ -11,13 +12,13 @@ export class MailerService {
     this.mailer = new Resend(configService.get('MAILER_API_KEY'));
   }
 
-  async sendEmail(to: string, subject: string, template?: any, data?: any) {
+  async sendEmail(to: string, subject: string, template?: any, data?: any, lang: string = "en") {
     // TODO Install react mailer To select template
     // Validate template argument
     if (!EmailTemplates[template]) {
       throw new Error('Invalid email template specified');
     }
-
+    i18n.changeLanguage(lang);
     const templateFunction = EmailTemplates[template];
     const mail = await this.mailer.emails.send({
       from: `Nexus <${this.configService.get('MAILER_MAIL_ADDRESS')}>`,

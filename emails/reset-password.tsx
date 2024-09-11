@@ -11,7 +11,7 @@ import {
 	Text,
   } from '@react-email/components';
   import * as React from 'react';
-  
+  import i18n from '../i18n';
   export interface ResetPasswordProps {
 	token: string;
   }
@@ -39,6 +39,7 @@ import {
 			  style={logo}
 			/>
 			<Text style={paragraph}>Bonjour,</Text>
+			<Text>{i18n.t('email.reset-password.body')}</Text>
 			<Text style={paragraph}>
 			  Si vous avez demandé un changement de mot de passe, veuillez cliquer sur le lien ci-dessous. Si vous n'avez pas demandé de changement de mot de passe, ignorez cet email.
 			</Text>

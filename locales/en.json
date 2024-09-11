@@ -1,0 +1,9 @@
+{
+	"email": {
+		"reset-password": {
+			"subject": "Bienvenue!",
+			"body": "Si vous avez demandé un changement de mot de passe, veuillez cliquer sur le lien ci-dessous. Si vous n'avez pas demandé de changement de mot de passe, ignorez cet email."
+		}
+	}
+}
+  

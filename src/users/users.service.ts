@@ -16,7 +16,7 @@ export class UsersService {
 ) {}
 
   async createUserAndAccount(createUserDto: CreateUserDto, req: any) {
-	const { email, password, name } = createUserDto;
+	const { email, password, name, language } = createUserDto;
   
 	const hashedPassword = await bcrypt.hash(password, 10);
   
@@ -26,6 +26,7 @@ export class UsersService {
 				email,
 				password: hashedPassword,
 				name,
+				language,
 			},
 		});
 
@@ -51,6 +52,7 @@ export class UsersService {
 			{
 			  token,
 			},
+			user.language
 		  );
 		  req.session.user = user;
 		  req.session.save();
@@ -119,6 +121,7 @@ export class UsersService {
 			{
 				token,
 			},
+			user.language
 		);
 
 		return { status: 200, message: 'Verification email sent' };
@@ -144,6 +147,7 @@ export class UsersService {
 			{
 				token,
 			},
+			user.language
 		);
 
 		return { status: 200, message: 'Reset password email sent' };
