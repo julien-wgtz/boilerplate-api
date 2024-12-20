@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import EmailTemplates from '../../emails';
 import { Resend } from 'resend';
-import i18n from '../../i18n';
+import i18n from '../../i18n.js';
 
 @Injectable()
 export class MailerService {
@@ -13,8 +13,6 @@ export class MailerService {
   }
 
   async sendEmail(to: string, subject: string, template?: any, data?: any, lang: string = "en") {
-    // TODO Install react mailer To select template
-    // Validate template argument
     if (!EmailTemplates[template]) {
       throw new Error('Invalid email template specified');
     }

@@ -1,5 +1,6 @@
 #Config
-/config/.env*
+/config
+
 
 # compiled output
 /dist
@@ -36,3 +37,4 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+certificates

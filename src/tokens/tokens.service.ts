@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 export class TokensService {
 	constructor(private readonly prismaService: PrismaService) {}
 
-	async generateToken(userId: number, email: string, type: string) {
+	async generateToken(userId: number, email: string, type: string, data?: any) {
 		const randomNumber = randomBytes(32).toString('hex');
 		const hashedToken = await bcrypt.hash(randomNumber+email, 10);
 
@@ -20,6 +20,7 @@ export class TokensService {
 				token: hashedToken,
 				expiresAt: expirationDate,
 				type,
+				data: JSON.stringify(data),
 			},
 		});
 
@@ -27,6 +28,10 @@ export class TokensService {
 	}
 
 	async validateToken(token: string, type: string) {
+		if (!type || !token) {
+			return false;
+		  }
+		
 		const tokenRecord = await this.prismaService.token.findFirst({
 			where: {
 				token,
@@ -37,11 +42,12 @@ export class TokensService {
 			},
 		});
 
+
 		if (!tokenRecord) {
 			return false;
 		}
 
-		return true;
+		return tokenRecord;
 	}
 	async deleteToken(token: string) {
 		await this.prismaService.token.deleteMany({

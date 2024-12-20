@@ -3,33 +3,40 @@ import { AppModule } from './app.module';
 import { ConfigService } from '@nestjs/config';
 import { NotFoundExceptionFilter } from './filter/not-found.filter';
 import { readFileSync } from 'fs';
+import * as bodyParser from 'body-parser';
 import session from 'express-session'; // Import session directly from 'express-session'
-import  connectPgSimple from 'connect-pg-simple';
+import connectPgSimple from 'connect-pg-simple';
 import { join } from 'path';
-
+import cors from 'cors';
 async function bootstrap() {
   let app;
 
   if (process.env.NODE_ENV === 'development') {
     const httpsOptions = {
-      key: readFileSync('config/certs/server.key'),  // chemin vers ta clé privée
-      cert: readFileSync('config/certs/server.cert'),  // chemin vers ton certificat public
+      key: readFileSync('config/certs/key.pem'), // chemin vers ta clé privée
+      cert: readFileSync('config/certs/cert.pem'), // chemin vers ton certificat public
     };
-    
+
     app = await NestFactory.create(AppModule, {
       httpsOptions,
     });
-
-    app.enableCors(); // Enable CORS for development environment
   } else {
     app = await NestFactory.create(AppModule);
   }
 
   const configService = app.get(ConfigService);
-  const port = configService.get('PORT') as number; 
+  const port = configService.get('PORT') as number;
   const hostname = configService.get('HOSTNAME') as string;
   const pgSession = connectPgSimple(session);
   app.useGlobalFilters(new NotFoundExceptionFilter());
+  app.use(
+    cors({
+      origin: 'https://localhost:3000', // Autorise uniquement localhost:3000
+      credentials: true, // Autorise les cookies
+    }),
+  );
+  app.use(bodyParser.json({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
   app.use(
     session({
       store: new pgSession({

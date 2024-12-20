@@ -20,18 +20,25 @@ model User {
   name      String?
   password  String
   accounts  UserAccount[]
+  currentAccount Account? @relation(fields: [currentAccountId], references: [id])
+  currentAccountId Int?
   verified  Boolean   @default(false)
   tokens    Token[]
+  notifications Notification[]
   language  String    @default("fr")
+  theme     String    @default("dark")
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
+  avatar   String?
 }
 
 model Account {
   id         Int           @id @default(autoincrement())
   name       String
-  status     AccountStatus // Enum définissant le statut du compte
-  users      UserAccount[] // Relation Many-to-Many entre User et Account
+  status     AccountStatus
+  users      UserAccount[]
+  usersCurrentlyConnected User[]
+  avatar     String?
   createdAt  DateTime      @default(now())
   updatedAt  DateTime      @updatedAt
 }
@@ -42,7 +49,7 @@ model UserAccount {
   userId    Int
   account   Account  @relation(fields: [accountId], references: [id])
   accountId Int
-  role      UserRole // Enum définissant le rôle de l'utilisateur pour ce compte
+  role      UserRole 
   createdAt DateTime @default(now())
 }
 
@@ -59,10 +66,22 @@ model Token {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
   token     String
+  data      Json?
   type      String
   createdAt DateTime @default(now())
   expiresAt DateTime
     @@map("Tokens")
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  data      Json
+  type      String
+  read      Boolean  @default(false)
+  seen      Boolean  @default(false)
+  createdAt DateTime @default(now())
 }
 
 //
@@ -80,4 +99,5 @@ enum UserRole {
   ADMIN
   MEMBER
   VIEWER
+  INVITED
 }
